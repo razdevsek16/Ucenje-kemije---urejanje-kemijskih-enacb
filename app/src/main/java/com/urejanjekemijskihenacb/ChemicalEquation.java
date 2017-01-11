@@ -1,8 +1,8 @@
 package com.urejanjekemijskihenacb;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,33 +11,32 @@ import android.widget.Toast;
 import com.urejanjekemijskihenacb.BalancingEquationLogic.InvalidUserInputException;
 import com.urejanjekemijskihenacb.BalancingEquationLogic.chEquation;
 
-public class MainActivity extends AppCompatActivity {
+public class ChemicalEquation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chemical_equation);
 
-        Intent intent=new Intent(this,ChemicalEquation.class);
-        startActivity(intent);
-/*
-        EditText insertEquation = (EditText) this.findViewById(R.id.insertEquation);
-        String test1 = "Li + O2 -> Li2O";
-        TextView resultEquation = (TextView) this.findViewById(R.id.resultEquation);
+        final EditText insertEquation = (EditText) this.findViewById(R.id.insertEquation);
+        final TextView resultEquation = (TextView) this.findViewById(R.id.resultEquation);
         Button test = (Button) this.findViewById(R.id.buttonTest);
-        String s = test1;
-        try {
-            String rez = balance(s);
-            resultEquation.setText(rez);
 
-            Toast.makeText(getApplication(), rez, Toast.LENGTH_LONG).show();
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String s = insertEquation.getText().toString();
+                try {
+                    String rez = balance(s);
+                    resultEquation.setText(rez);
 
-        } catch (Exception e) {
-            Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show();
-        }
-*/
+                    Toast.makeText(getApplication(), rez, Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
-
     public static String balance(String s) throws InvalidUserInputException
     {
         s = s.replaceAll("=",":");
@@ -89,3 +88,5 @@ public class MainActivity extends AppCompatActivity {
         return output.substring(0,output.length()-1);
     }
 }
+
+
