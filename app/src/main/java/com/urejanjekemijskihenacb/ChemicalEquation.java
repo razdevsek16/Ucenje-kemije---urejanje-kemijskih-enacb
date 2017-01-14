@@ -1,10 +1,12 @@
 package com.urejanjekemijskihenacb;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ public class ChemicalEquation extends AppCompatActivity {
 
         final EditText insertEquation = (EditText) this.findViewById(R.id.insertEquation);
         final TextView resultEquation = (TextView) this.findViewById(R.id.resultEquation);
+        final ImageView brain=(ImageView)this.findViewById(R.id.brainImage);
         Button test = (Button) this.findViewById(R.id.buttonTest);
 
         test.setOnClickListener(new View.OnClickListener() {
@@ -29,10 +32,17 @@ public class ChemicalEquation extends AppCompatActivity {
                 try {
                     String rez = balance(s);
                     resultEquation.setText(rez);
+                    resultEquation.setTextColor(Color.GREEN);
+                    resultEquation.setTextSize(20);
+                    brain.setImageResource(R.mipmap.brain_know);
 
-                    Toast.makeText(getApplication(), rez, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplication(), rez, Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
-                    Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show();
+                    resultEquation.setText("This equation doesn't have any solution!");
+                    resultEquation.setTextColor(Color.RED);
+
+                    brain.setImageResource(R.mipmap.brain_dont_know);
                 }
             }
         });
