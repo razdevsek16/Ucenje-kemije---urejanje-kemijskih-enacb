@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChemicalEquation"></activity>
+        <activity android:name=".ChemicalEquation" />
+        <activity android:name=".AnimatedExample"></activity>
     </application>
 
 </manifest>

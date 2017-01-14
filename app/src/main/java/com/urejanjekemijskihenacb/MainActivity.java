@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Animate();
             }
         });
 
@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void Equation(){
         Intent intent=new Intent(this,ChemicalEquation.class);
+        startActivity(intent);
+    }
+    public void Animate(){
+        Intent intent=new Intent(this,AnimatedExample.class);
         startActivity(intent);
     }
 

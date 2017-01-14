@@ -1,14 +1,15 @@
 package com.urejanjekemijskihenacb;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.urejanjekemijskihenacb.BalancingEquationLogic.InvalidUserInputException;
 import com.urejanjekemijskihenacb.BalancingEquationLogic.chEquation;
@@ -23,9 +24,11 @@ public class ChemicalEquation extends AppCompatActivity {
         final EditText insertEquation = (EditText) this.findViewById(R.id.insertEquation);
         final TextView resultEquation = (TextView) this.findViewById(R.id.resultEquation);
         final ImageView brain=(ImageView)this.findViewById(R.id.brainImage);
-        Button test = (Button) this.findViewById(R.id.buttonTest);
+        Button calculate = (Button) this.findViewById(R.id.buttonCalculate);
+        final Button saveData= (Button)this.findViewById(R.id.buttonSave);
+        saveData.setVisibility(View.INVISIBLE);
 
-        test.setOnClickListener(new View.OnClickListener() {
+        calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String s = insertEquation.getText().toString();
@@ -35,7 +38,7 @@ public class ChemicalEquation extends AppCompatActivity {
                     resultEquation.setTextColor(Color.GREEN);
                     resultEquation.setTextSize(20);
                     brain.setImageResource(R.mipmap.brain_know);
-
+                    saveData.setVisibility(View.VISIBLE);
                     //Toast.makeText(getApplication(), rez, Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     //Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show();
@@ -46,7 +49,34 @@ public class ChemicalEquation extends AppCompatActivity {
                 }
             }
         });
+        saveData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            saveEquation(resultEquation.getText().toString());
+
+            }
+        });
     }
+    public void saveEquation(String equationResult){
+        final Dialog saveDialog=new Dialog(this);
+        //saveDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        saveDialog.setContentView(R.layout.dialog_save_equation);
+        saveDialog.show();
+
+        final TextView equationRes=(TextView)saveDialog.findViewById(R.id.equationResult);
+        equationRes.setText(equationResult);
+
+        Button btnSaveEquation=(Button)saveDialog.findViewById(R.id.saveEquationDialogButton);
+        btnSaveEquation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //equationRes.setText("Dela neki!!");
+                saveDialog.dismiss();
+            }
+        });
+    }
+
     public static String balance(String s) throws InvalidUserInputException
     {
         s = s.replaceAll("=",":");
