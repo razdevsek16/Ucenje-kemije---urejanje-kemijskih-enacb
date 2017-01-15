@@ -2,12 +2,24 @@ package com.urejanjekemijskihenacb;
 
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
+import android.media.session.MediaController;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.VideoView;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class AnimatedExample extends AppCompatActivity {
 
@@ -16,9 +28,10 @@ public class AnimatedExample extends AppCompatActivity {
     //boolean pause=false;
     boolean start=true;
     boolean playtillEnd;
-    Button play;
-    Button pause;
-    Button stop;
+    Spinner animationList;
+    String selectedAnimation;
+    TextView description;
+    String uriPath2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,63 +40,56 @@ public class AnimatedExample extends AppCompatActivity {
         getWindow().setFormat(PixelFormat.UNKNOWN);
         playtillEnd=false;
 
+        List<String> list=new ArrayList<String>();
+        list.add("Ammonia");
+        list.add("Complete Combustion");
+        list.add("Incomplete Combustion");
 
-        play=(Button)this.findViewById(R.id.playAnimatedVideo);
-        pause=(Button)this.findViewById(R.id.pauseAnimatedVideo);
-        stop=(Button)this.findViewById(R.id.stopAnimatedVideo);
 
-        play.setOnClickListener(new View.OnClickListener() {
+        ArrayAdapter<String> adapterSpinner=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item, list);
+        adapterSpinner.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+
+        description=(TextView)this.findViewById(R.id.descriptionAnimation);
+        animationList=(Spinner)this.findViewById(R.id.animationsSpinner);
+        animationList.setAdapter(adapterSpinner);
+        animatedVideo=(VideoView)this.findViewById(R.id.animatedVideo);
+
+        animationList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if(playtillEnd==true){
-                    animatedVideo.resume();
-                    //playtillEnd=false;
-                }
-                else
-                {
-                    Play();
-                }
+                selectedAnimation=adapterView.getItemAtPosition(i).toString();
+                    if(selectedAnimation=="Ammonia"){
+                        uriPath2 = "android.resource://com.urejanjekemijskihenacb/"+R.raw.nh3;
+                        description.setText(R.string.Ammonia);
+                    }
+                    if(selectedAnimation=="Complete Combustion"){
+                        uriPath2 = "android.resource://com.urejanjekemijskihenacb/"+R.raw.ch4_01;
+                        description.setText(R.string.CompleteCombustion);
+                    }
+                    if(selectedAnimation=="Incomplete Combustion"){
+                        uriPath2 = "android.resource://com.urejanjekemijskihenacb/"+R.raw.ch4;
+                        description.setText(R.string.IncompleteCombustion);
+                    }
+
+                    Uri uri2 = Uri.parse(uriPath2);
+                    animatedVideo.setVideoURI(uri2);
+                    animatedVideo.requestFocus();
+                    animatedVideo.start();
+                    start=false;
+                    playtillEnd=true;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animatedVideo.pause();
-
-            }
-        });
-
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animatedVideo.stopPlayback();
-                start=true;
-            }
-        });
-        /*
-        }*/
 
 
 
 
-    }
-    public void Play(){
-
-
-        if(start==true){
-            animatedVideo=(VideoView)this.findViewById(R.id.animatedVideo);
-            String uriPath2 = "android.resource://com.urejanjekemijskihenacb/"+R.raw.nh3;
-            Uri uri2 = Uri.parse(uriPath2);
-            animatedVideo.setVideoURI(uri2);
-            animatedVideo.requestFocus();
-            animatedVideo.start();
-            start=false;
-            playtillEnd=true;
-        }else {
-            animatedVideo.resume();
-
-        }
 
     }
 }

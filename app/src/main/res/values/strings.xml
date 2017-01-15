@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">UrejanjeKemijskihEnacb</string>
+    <string name="Ammonia">
+        Ammonia or azane is a compound of nitrogen and hydrogen with the formula NH3. The simplest pnictogen hydride, ammonia is a colourless gas with a characteristic pungent smell. It contributes significantly to the nutritional needs of terrestrial organisms by serving as a precursor to food and fertilizers. Ammonia, either directly or indirectly, is also a building block for the synthesis of many pharmaceutical products and is used in many commercial cleaning products.
+    </string>
+    <string name="CompleteCombustion">
+        In complete combustion, the reactant burns in oxygen, producing a limited number of products. When a hydrocarbon burns in oxygen, the reaction will primarily yield carbon dioxide and water. When elements are burned, the products are primarily the most common oxides. Carbon will yield carbon dioxide, sulfur will yield sulfur dioxide, and iron will yield iron(III) oxide. Nitrogen is not considered to be a combustible substance when oxygen is the oxidant, but small amounts of various nitrogen oxides (commonly designated NO
+x species) form when air is the oxidant.
+    </string>
+    <string name="IncompleteCombustion">
+        Incomplete combustion will occur when there is not enough oxygen to allow the fuel to react completely to produce carbon dioxide and water. It also happens when the combustion is quenched by a heat sink, such as a solid surface or flame trap.
+For most fuels, such as diesel oil, coal or wood, pyrolysis occurs before combustion. In incomplete combustion, products of pyrolysis remain unburnt and contaminate the smoke with noxious particulate matter and gases. Partially oxidized compounds are also a concern; partial oxidation of ethanol can produce harmful acetaldehyde, and carbon can produce toxic carbon monoxide.
+    </string>
 </resources>
