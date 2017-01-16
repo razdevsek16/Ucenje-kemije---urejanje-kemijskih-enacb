@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChemicalEquation" />
-        <activity android:name=".AnimatedExample"></activity>
+        <activity android:name=".AnimatedExample" />
+        <activity android:name=".ChemistryList"></activity>
     </application>
 
 </manifest>

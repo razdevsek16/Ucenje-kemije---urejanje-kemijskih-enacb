@@ -1,21 +1,30 @@
 package com.urejanjekemijskihenacb;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.urejanjekemijskihenacb.BalancingEquationLogic.InvalidUserInputException;
 import com.urejanjekemijskihenacb.BalancingEquationLogic.chEquation;
+import com.urejanjekemijskihenacb.SqlDataBase.ChemistryDBHelper;
 
 public class ChemicalEquation extends AppCompatActivity {
 
+    Context context=this;
+    ChemistryDBHelper chemistryDBHelper;
+    SQLiteDatabase sqLiteDatabase;
+    EditText txtName;
+    TextView txtEqu;
+    EditText txtDescrip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,9 +81,24 @@ public class ChemicalEquation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //equationRes.setText("Dela neki!!");
+                txtName=(EditText)saveDialog.findViewById(R.id.nameEquationEditText);
+                txtEqu=(TextView)saveDialog.findViewById(R.id.equationResult);
+                txtDescrip=(EditText)saveDialog.findViewById(R.id.descriptionEditText);
+                addEquationInfo();
                 saveDialog.dismiss();
             }
         });
+    }
+
+    public void addEquationInfo(){
+        String name=txtName.getText().toString();
+        String equation=txtEqu.getText().toString();
+        String description=txtDescrip.getText().toString();
+        chemistryDBHelper = new ChemistryDBHelper(context);
+        sqLiteDatabase = chemistryDBHelper.getWritableDatabase();
+        chemistryDBHelper.addInformations(name,equation,description,sqLiteDatabase);
+        Toast.makeText(getBaseContext(),"Equation has been saved!!!",Toast.LENGTH_SHORT).show();
+        chemistryDBHelper.close();
     }
 
     public static String balance(String s) throws InvalidUserInputException

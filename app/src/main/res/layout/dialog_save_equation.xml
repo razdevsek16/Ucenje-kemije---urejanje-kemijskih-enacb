@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp">
         <TextView
+            android:id="@+id/equationText"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="left"

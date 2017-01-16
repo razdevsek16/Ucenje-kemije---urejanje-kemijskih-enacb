@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ShowSaved();
             }
         });
         animate.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void Animate(){
         Intent intent=new Intent(this,AnimatedExample.class);
+        startActivity(intent);
+    }
+    public void ShowSaved(){
+        Intent intent = new Intent(this,ChemistryList.class);
         startActivity(intent);
     }
 
